@@ -75,6 +75,10 @@ func (s *Session) Close() {
 func (t *CustomTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	// Set the User-Agent header on the request.
 	req.Header.Set("User-Agent", t.UserAgent)
+	// set other headers
+	req.Header.Set("Accept", "*/*")
+	req.Header.Set("Accept-Language", "en-US,en;q=0.9")
+	req.Header.Set("Connection", "close")
 	// Use the underlying transport to perform the actual request.
 	return t.Transport.RoundTrip(req)
 }
