@@ -102,9 +102,9 @@ func (r *Runner) RunEnumeration() error {
 		// by default, leaker will raise an error if the output file is already exist
 		// it is done like that to increase data safety, but this behavior can be overwritten with --overwrite
 		if r.options.Overwrite {
-			file, err = utils.CreateFile(r.options.OutputFile, true)
+			file, err = utils.CreateFileWithSafe(r.options.OutputFile, true, true)
 		} else {
-			file, err = utils.CreateFileWithSafe(r.options.OutputFile, true)
+			file, err = utils.CreateFileWithSafe(r.options.OutputFile, true, false)
 		}
 		if err != nil {
 			return err
