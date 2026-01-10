@@ -2,6 +2,7 @@ package runner
 
 import (
 	"bufio"
+	"fmt"
 	"github.com/vflame6/leaker/logger"
 	"github.com/vflame6/leaker/utils"
 	"io"
@@ -45,6 +46,12 @@ func NewRunner(options *Options) (*Runner, error) {
 
 	// Default output is stdout
 	options.Output = os.Stdout
+
+	// configure User Agent
+	// if not specified, will set the default User-Agent string
+	if options.UserAgent == "" {
+		options.UserAgent = fmt.Sprintf("leaker/%s", options.Version)
+	}
 
 	r := &Runner{
 		options: options,

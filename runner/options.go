@@ -29,7 +29,9 @@ type Options struct {
 	Sources        []string
 	Targets        string
 	Timeout        time.Duration
+	UserAgent      string
 	Verbose        bool
+	Version        string
 }
 
 func listSources(options *Options) {

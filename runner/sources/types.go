@@ -24,6 +24,12 @@ type Result struct {
 	Error  error
 }
 
+// CustomTransport wraps http.Transport and adds a default User-Agent header.
+type CustomTransport struct {
+	Transport http.RoundTripper
+	UserAgent string
+}
+
 type Session struct {
 	Client *http.Client
 }

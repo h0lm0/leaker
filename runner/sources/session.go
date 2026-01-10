@@ -10,8 +10,8 @@ import (
 )
 
 // NewSession creates a new session object for an email
-func NewSession(timeout time.Duration) (*Session, error) {
-	Transport := &http.Transport{
+func NewSession(timeout time.Duration, userAgent string) (*Session, error) {
+	tr := &http.Transport{
 		MaxIdleConns:        100,
 		MaxIdleConnsPerHost: 100,
 		TLSClientConfig: &tls.Config{
@@ -22,8 +22,13 @@ func NewSession(timeout time.Duration) (*Session, error) {
 		}).Dial,
 	}
 
+	customTransport := &CustomTransport{
+		Transport: tr,
+		UserAgent: userAgent,
+	}
+
 	client := &http.Client{
-		Transport: Transport,
+		Transport: customTransport,
 		Timeout:   timeout,
 	}
 
@@ -49,4 +54,13 @@ func (s *Session) DiscardHTTPResponse(response *http.Response) {
 // Close the session
 func (s *Session) Close() {
 	s.Client.CloseIdleConnections()
+}
+
+// RoundTrip implements the http.RoundTripper interface.
+// custom one is needed to specify user agent string.
+func (t *CustomTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	// Set the User-Agent header on the request.
+	req.Header.Set("User-Agent", t.UserAgent)
+	// Use the underlying transport to perform the actual request.
+	return t.Transport.RoundTrip(req)
 }

@@ -23,6 +23,7 @@ var CLI struct {
 
 	// CONFIGURATION
 	ProviderConfig string `short:"p" help:"provider config file" default:"provider-config.yml"`
+	UserAgent      string `short:"A" help:"custom user agent"`
 
 	// DEBUG
 	Version     bool `help:"print version of leaker"`
@@ -61,7 +62,9 @@ func Run() {
 		Sources:        CLI.Sources,
 		Targets:        CLI.Targets,
 		Timeout:        CLI.Timeout,
+		UserAgent:      CLI.UserAgent,
 		Verbose:        CLI.Verbose,
+		Version:        VERSION,
 	}
 
 	r, err := runner.NewRunner(options)

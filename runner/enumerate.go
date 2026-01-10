@@ -37,12 +37,12 @@ func (r *Runner) EnumerateSingleEmail(email string, timeout time.Duration, write
 	go func() {
 		defer close(results)
 
-		session, err := sources.NewSession(timeout)
+		session, err := sources.NewSession(timeout, r.options.UserAgent)
 		if err != nil {
 			results <- sources.Result{
 				Source: "",
 				Value:  "",
-				Error:  fmt.Errorf("could not init passive session for %s: %s", email, err),
+				Error:  fmt.Errorf("could not initiate passive session for %s: %s", email, err),
 			}
 			return
 		}

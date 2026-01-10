@@ -44,12 +44,12 @@ Flags:
   -o, --output=STRING                            file to write output to
   --overwrite                                force overwrite of existing file
   -p, --provider-config="provider-config.yml"    provider config file
+  -A, --user-agent=STRING                        custom user agent
   --version                                  print version of leaker
   -q, --quiet                                    suppress output, print results only
   -v, --verbose                                  show sources in results output
   -D, --debug                                    enable debug mode
   --list-sources                             list all available sources
-
 ```
 
 ## Installation
