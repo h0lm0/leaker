@@ -15,7 +15,8 @@ var CLI struct {
 	Sources []string `short:"s" default:"all" help:"specific sources to use for enumeration (default all). Use --list-sources to display all available sources."`
 
 	// OPTIMIZATION
-	Timeout time.Duration `help:"seconds to wait before timing out (default 10s)" default:"10s"`
+	Timeout     time.Duration `help:"seconds to wait before timing out (default 10s)" default:"10s"`
+	NoRateLimit bool          `short:"N" help:"disable rate limiting (DANGER)"`
 
 	// OUTPUT
 	Output    string `short:"o" help:"file to write output to"`
@@ -56,6 +57,7 @@ func Run() {
 	options := &runner.Options{
 		Debug:          CLI.Debug,
 		ListSources:    CLI.ListSources,
+		NoRateLimit:    CLI.NoRateLimit,
 		OutputFile:     CLI.Output,
 		Overwrite:      CLI.Overwrite,
 		ProviderConfig: CLI.ProviderConfig,

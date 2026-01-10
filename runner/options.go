@@ -21,6 +21,7 @@ var (
 type Options struct {
 	Debug          bool
 	ListSources    bool
+	NoRateLimit    bool
 	Output         io.Writer
 	OutputFile     string
 	Overwrite      bool

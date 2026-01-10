@@ -41,6 +41,7 @@ Flags:
   -h, --help                                     Show context-sensitive help.
   -s, --sources=all,...                          specific sources to use for enumeration (default all). Use --list-sources to display all available sources.
   --timeout=10s                              seconds to wait before timing out (default 10s)
+  -N, --no-rate-limit                            disable rate limiting (DANGER)
   -o, --output=STRING                            file to write output to
   --overwrite                                force overwrite of existing file
   -p, --provider-config="provider-config.yml"    provider config file

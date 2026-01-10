@@ -59,7 +59,9 @@ func (r *Runner) EnumerateSingleEmail(email string, timeout time.Duration, write
 				}
 				// sleep to enable source rate-limiting
 				// this is done like that because email enumeration is done one by one
-				time.Sleep(time.Second / time.Duration(s.RateLimit()))
+				if !r.options.NoRateLimit {
+					time.Sleep(time.Second / time.Duration(s.RateLimit()))
+				}
 			}(s)
 		}
 		wg.Wait()
