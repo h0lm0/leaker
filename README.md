@@ -53,7 +53,7 @@ Flags:
   -q, --quiet                                    Suppress output, print results only
   -v, --verbose                                  Show sources in results output
   -D, --debug                                    Enable debug mode
-  --list-sources                             List all available sources
+  -L, --list-sources                             List all available sources
 ```
 
 ## Installation
