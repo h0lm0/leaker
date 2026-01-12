@@ -21,6 +21,7 @@ var (
 type Options struct {
 	Debug          bool
 	ListSources    bool
+	NoFilter       bool
 	NoRateLimit    bool
 	Output         io.Writer
 	OutputFile     string

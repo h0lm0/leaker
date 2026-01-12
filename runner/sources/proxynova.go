@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/vflame6/leaker/logger"
 	"io"
-	"strings"
 )
 
 type ProxyNovaResponse struct {
@@ -62,15 +61,12 @@ func (s *ProxyNova) Run(email string, session *Session) <-chan Result {
 		}
 
 		if response.Count > 0 {
-			// ProxyNova gives non-filtered results, so check if the result contains a username
-			username := strings.Split(email, "@")[0]
+			// ProxyNova gives non-filtered results, so the output will be a mess
 			for _, line := range response.Lines {
-				if strings.Contains(line, username) {
-					results <- Result{
-						Source: s.Name(),
-						Value:  line,
-						Error:  nil,
-					}
+				results <- Result{
+					Source: s.Name(),
+					Value:  line,
+					Error:  nil,
 				}
 			}
 		}

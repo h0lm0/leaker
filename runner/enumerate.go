@@ -5,6 +5,7 @@ import (
 	"github.com/vflame6/leaker/logger"
 	"github.com/vflame6/leaker/runner/sources"
 	"io"
+	"strings"
 	"sync"
 	"time"
 )
@@ -20,10 +21,16 @@ func (r *Runner) EnumerateSingleEmail(email string, timeout time.Duration, write
 	// Process the results in a separate goroutine
 	go func() {
 		for result := range results {
+			// check if error
 			if result.Error != nil {
 				logger.Errorf("error enumerating email %s: %s", email, result.Error)
 				continue
 			}
+			// check if filtered
+			if !r.options.NoFilter && !strings.Contains(result.Value, email) {
+				continue
+			}
+			// write result
 			for _, writer := range writers {
 				err = WritePlainResult(writer, r.options.Verbose, result.Source, result.Value)
 				if err != nil {
